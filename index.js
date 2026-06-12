@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-let nextId = 1;
+let nextId = 3;
 
 app.use(express.json());
 

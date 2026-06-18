@@ -1,6 +1,6 @@
 # API Tasks
 
-API REST para gerenciamento de tarefas (CRUD completo), construída como projeto de estudo prático de back-end com Node.js, Express e PostgreSQL.
+API REST para gerenciamento de tarefas (CRUD completo), construída com Node.js, Express e PostgreSQL.
 
 ## Stack
 
@@ -107,10 +107,6 @@ Content-Type: application/json
 ```bash
 GET /tasks/status/ativo
 ```
-
-## Status do projeto
-
-Projeto em desenvolvimento contínuo, como parte de um roadmap estruturado de aprendizado de back-end. Próximos passos incluem filtros via query params, validação de dados com Zod e autenticação com JWT.
 
 ## Autor
 

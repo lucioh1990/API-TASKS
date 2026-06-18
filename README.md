@@ -12,10 +12,6 @@ API REST para gerenciamento de tarefas (CRUD completo), construída com Node.js,
 ## Funcionalidades
 
 - CRUD completo de tarefas (criar, listar, buscar, atualizar, deletar)
-- Filtros por status e prioridade
-- Busca por texto (título e descrição)
-- Combinação de filtros com múltiplas condições (AND / OR)
-- Ordenação de resultados
 - Tratamento de erros com status codes apropriados (200, 201, 204, 404)
 
 ## Demonstração
@@ -30,12 +26,6 @@ API REST para gerenciamento de tarefas (CRUD completo), construída com Node.js,
 |---|---|---|
 | GET | `/tasks` | Lista todas as tarefas |
 | GET | `/tasks/:id` | Busca uma tarefa pelo ID |
-| GET | `/tasks/status/:status` | Filtra tarefas por status |
-| GET | `/tasks/urgentes` | Lista tarefas com prioridade alta e status ativo |
-| GET | `/tasks/buscar/:texto` | Busca tarefas pelo título |
-| GET | `/tasks/buscar2/:texto` | Busca tarefas pelo título ou descrição |
-| GET | `/tasks/ordenadas` | Lista tarefas ordenadas por ID (decrescente) |
-| GET | `/tasks/status/:status/ordenadas` | Filtra por status e ordena por ID |
 | POST | `/tasks` | Cria uma nova tarefa |
 | PUT | `/tasks/:id` | Atualiza uma tarefa existente |
 | DELETE | `/tasks/:id` | Remove uma tarefa |

@@ -1,76 +1,66 @@
 const express = require('express');
+const prisma  = require('./prisma/client')
 const app = express();
 let nextId = 3;
 
 app.use(express.json());
 
-let tasks = [
-  {id: 1, title:'teste 1', description: 'descrição 1', status: 'ativo', priority: 'Alta'},
-  {id: 2, title: 'teste 2', description: 'descrição 2', status: 'inativo', priority: 'Media'},
-]
+
 
 app.get('/', (req, res) => {
   res.send('Hello Tasks!');
 });
 
-app.get('/tasks', (req, res) => {
+app.get('/tasks', async (req, res) => {
+  const tasks = await prisma.task.findMany()
   res.json(tasks);
 });
 
-app.get('/tasks/:id', (req,res) => {
- const task = tasks.find(busca => busca.id === Number(req.params.id));
- if(!task){
-  return res.status(404).json({error: 'Não encontrado'})
- }
-res.json(task);
+app.get('/tasks/:id', async (req, res) => {
+  const { id } = req.params
+  const task = await prisma.task.findUnique({
+    where: { id: Number(id) }
+  });
+  if (!task) {
+    return res.status(404).json({ error: 'Não encontrado' })
+  }
+  res.json(task);
 })
 
-app.post('/tasks',(req,res) =>{
+app.post('/tasks', async(req, res) => {
 
-    const {title, description, status, priority} = req.body;
+  const { title, description, status, priority } = req.body;
 
-    const newTask = {
-      id: nextId++,
-      title: title,
-      description: description,
-      status: status,
-      priority: priority,
-    }
-    tasks.push(newTask);
-
-    res.status(201).json(newTask);
+  const task = await prisma.task.create({
+    data: { title, description, status, priority }
+  })
+     res.status(201).json(task);
 
 })
 
-app.put('/tasks/:id', (req, res) =>{
-  const {id} = req.params;
+app.put('/tasks/:id', async (req, res) => {
+  const { id } = req.params;
   const { title, description, status, priority } = req.body
-  const index = tasks.findIndex(t => t.id === Number(id));
-  if (index === -1){
-    return res.status(404).json({error: 'Não encontrado'})
+  try{
+    const task = await prisma.task.update({
+      where: {id: Number(id)},
+      data: {title,description,status,priority}
+    })
+    res.json(task)
+  }catch {
+    res.status(404).json({error: 'Não encontrada'})
   }
-  tasks[index] = {
-    ...tasks[index],
-    title,
-    description,
-    status,
-    priority
-  }
-  res.json(tasks[index]);
 
 })
 
-app.delete('/tasks/:id', (req,res) =>{
-   const {id} = req.params;
-
-   const tasksExists = tasks.find(t => t.id === Number(id));
-   if (!tasksExists){
-    return res.status(404).json({error: 'Não encontrado'});
-   }
-    tasks = tasks.filter(t => t.id !== Number(id));
-
-   res.status(204).send();
-
+app.delete('/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+  try{
+  await prisma.task.delete({where: {id: Number(id)}})
+  res.status(204).send();
+  }catch {
+    res.status(404).json({error: 'Não encontrado'})
+  }  
 
 })
 

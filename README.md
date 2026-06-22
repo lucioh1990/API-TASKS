@@ -175,4 +175,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 
 ## Autor
 
-[Lúcio Oliveira
+Lúcio Oliveira

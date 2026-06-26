@@ -25,9 +25,8 @@ API REST para gerenciamento de tarefas (CRUD completo), com autenticação JWT, 
 
 ## Demonstração
 
-> _Espaço reservado para print ou GIF mostrando as requisições funcionando no Postman._
+https://youtu.be/gSa91lSUXTI
 
-![demo](./docs/demo.gif)
 
 ## Autenticação
 

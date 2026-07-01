@@ -19,6 +19,25 @@ model Task {
   priority    String   @default("medium")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  projectId Int?
+  project     Project? @relation(fields: [projectId], references: [id])
+  categoryId Int?
+  category Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  status String @default("active")
+  tasks Task[]
+}
+
+model Category{
+  id Int @id @default(autoincrement())
+  name String
+  color String
+  tasks Task[]
 }
 
 model User {

@@ -7,6 +7,7 @@ const tasksRoutes = require('./src/routes/tasks.routes');
 const projectsRoutes = require('./src/routes/projects.routes');
 const categoriesRoutes = require('./src/routes/categories.routes');
 const authRoutes = require('./src/routes/auth.routes');
+const dashboardRoutes = require('./src/routes/dashboard.routes');
 const { errorHandler } = require('./src/middleware/errorHandler');
 
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use('/tasks', tasksRoutes);
 app.use('/projects', projectsRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/', authRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 app.use(errorHandler);
 

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 
 const tasksRoutes = require('./src/routes/tasks.routes');
@@ -11,6 +12,7 @@ const dashboardRoutes = require('./src/routes/dashboard.routes');
 const { errorHandler } = require('./src/middleware/errorHandler');
 
 app.use(express.json());
+app.use(cors());
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
@@ -22,6 +24,7 @@ app.use('/projects', projectsRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/', authRoutes);
 app.use('/dashboard', dashboardRoutes);
+
 
 app.use(errorHandler);
 

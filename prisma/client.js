@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const { PrismaPg } = require('@prisma/adapter-pg')
 
 const adapter = new PrismaPg({
-  connectionString: 'postgresql://lucio:senha123@localhost:5432/tasks_db'
+  connectionString: process.env.DATABASE_URL
 })
 
 const prisma = new PrismaClient({ adapter })
